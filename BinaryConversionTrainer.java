@@ -88,12 +88,12 @@ public class BinaryConversionTrainer
           
           answer = input.nextLine();
           
-          decimalResult = binaryToDecimal(helloWorldBinary);  //Something with this statement is throwing a StringIndexOutOfBounds exception?
+          decimalResult = binaryToDecimal(helloWorldBinary);
           
           System.out.print(decimalResult);
           
           
-          System.out.printf("DEBUG: helloWorldBinary: %s", helloWorldBinary);
+          //System.out.printf("DEBUG: helloWorldBinary: %s", helloWorldBinary);
           
         }//end if
         
@@ -148,22 +148,26 @@ public class BinaryConversionTrainer
     
     ArrayList <String> substrings = new ArrayList();
     ArrayList <String> decimals = new ArrayList();
-    
-    for(int index = 0; index < length; index++)
-    {
-      
+
       for(int placeHolder = 0; placeHolder < length; placeHolder+=8)
       {
-        
+        int index = 0;
         substrings.add(index, s.substring(placeHolder, placeHolder+8));
+        
+        
+        index++;
         
       }
       
-      result += Integer.parseInt(substrings.get(index), 2) + ".";
-      
-    }
+      for(int i = 0; i < substrings.size(); i++)
+      {
+        
+        result += Integer.parseInt(substrings.get(i), 2) + ".";
+        
+      }
+
     
-    System.out.println(substrings);
+    //Debug statement for this method: System.out.println(substrings);
     
     return result;
     
