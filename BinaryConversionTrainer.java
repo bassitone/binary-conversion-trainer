@@ -148,10 +148,10 @@ public class BinaryConversionTrainer
     
     ArrayList substrings = new ArrayList();
     
-    for(int index = 0; index <= length; index++)
+    for(int index = 0; index < length; index++)
     {
       
-      for(int placeHolder = 0; placeHolder <= length; placeHolder+=8)
+      for(int placeHolder = 0; placeHolder < length; placeHolder+=8)
       {
         
         substrings.add(index, s.substring(placeHolder, placeHolder+8));
