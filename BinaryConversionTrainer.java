@@ -146,7 +146,8 @@ public class BinaryConversionTrainer
      * ArrayList provides scalability
      */
     
-    ArrayList substrings = new ArrayList();
+    ArrayList <String> substrings = new ArrayList();
+    ArrayList <String> decimals = new ArrayList();
     
     for(int index = 0; index < length; index++)
     {
@@ -158,9 +159,11 @@ public class BinaryConversionTrainer
         
       }
       
-      result += substrings.get(index) + ".";
+      result += Integer.parseInt(substrings.get(index), 2) + ".";
       
     }
+    
+    System.out.println(substrings);
     
     return result;
     
