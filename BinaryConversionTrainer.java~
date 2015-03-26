@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.util.Random;
 import javax.swing.JFrame;
+import java.util.ArrayList;
 
 public class BinaryConversionTrainer
 {
@@ -28,7 +29,7 @@ public class BinaryConversionTrainer
     char sample = ' ';
     int hasAscii = 3;
     String answer = "";
-    int decimalResult = 0;
+    String decimalResult = "";
     
     
     String helloWorldBinary = "01001000"+"01100101"+"01101100"+"01101100"+"01101111"+"00100000"+"01010111"+"01101111"+"01110010"+"01101100"+"01100100";
@@ -87,14 +88,19 @@ public class BinaryConversionTrainer
           
           answer = input.nextLine();
           
-          decimalResult = binaryToDecimal(helloWorldBinary);
+          decimalResult = binaryToDecimal(helloWorldBinary);  //Something with this statement is throwing a StringIndexOutOfBounds exception?
           
           System.out.print(decimalResult);
+          
+          
+          System.out.printf("DEBUG: helloWorldBinary: %s", helloWorldBinary);
           
         }//end if
         
         else //going TO binary from decimal/ASCII
         {
+          
+          
           
         }//end else
         
@@ -128,26 +134,38 @@ public class BinaryConversionTrainer
   }//end main()
   
   
-  public static int binaryToDecimal(String s)
+  public static String binaryToDecimal(String s)
   {
-    //array to handle any number of characters?
+    //arraylist to handle any number of characters.
+    
+    int length = s.length();
+    String result = "";
+    
     /*
-     * char[] numbers = s.toCharArray();
-     * int result = 0;
-     * for (int i=numbers.length; i==0; i--) {
-     * if (numbers[i]=='1') {
-     * result += (numbers.length-i+1)*2;
-     * }
-     * }
+     * Why ArrayList?  We can't know how long the randomly-generated binary strings will be.
+     * ArrayList provides scalability
      */
     
-    byte theByte = new Byte();
-      theByte = Byte.parseByte(s);
+    ArrayList <String> substrings = new ArrayList();
+    ArrayList <String> decimals = new ArrayList();
     
-    return byte.intValue();
+    for(int index = 0; index < length; index++)
+    {
+      
+      for(int placeHolder = 0; placeHolder < length; placeHolder+=8)
+      {
+        
+        substrings.add(index, s.substring(placeHolder, placeHolder+8));
+        
+      }
+      
+      result += Integer.parseInt(substrings.get(index), 2) + ".";
+      
+    }
     
+    System.out.println(substrings);
     
-    //return result;
+    return result;
     
   }
   
