@@ -1,2 +1,2 @@
 # binary-conversion-trainer
-Just little Java side-projects I throw together from time to time
+A small utility to convert binary strings to base 10 and vice versa.  Planning to add functionality to do same with IPv4 addresses and subnetting as an extension
