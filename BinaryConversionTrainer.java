@@ -18,11 +18,7 @@ public class BinaryConversionTrainer
   {
 
     //declare all the things
-    Random ipAddressGenerator = new Random();
-    int firstOctet = 0;
-    int secondOctet = 0;
-    int thirdOctet = 0;
-    int fourthOctet = 0;
+
     Scanner input = new Scanner(System.in);
     char toContinue = 'Y';
     char binaryChoice = ' ';
@@ -32,21 +28,7 @@ public class BinaryConversionTrainer
     String decimalResult = "";
 
 
-    String helloWorldBinary = "01001000"+"01100101"+"01101100"+"01101100"+"01101111"+"00100000"+"01010111"+"01101111"+"01110010"+"01101100"+"01100100";
 
-    String testBinaryOne = "01110000 01101100 01100101 01100001 01110011 "
-      + "01100101 00100000 01110100 "
-      + "01100001 01101100 01101011 "
-      + "00100000 01110100 01101111 "
-      + "00100000 01101101 01100101";
-
-    String testBinaryTwo = "01101100 01101001 01100110 01100101 00100000 "
-      + "01110010 01101001 01100111 "
-      + "01101000 01110100 00100000 "
-      + "01101110 01101111 01110111 "
-      + "00100000 01101001 01110011 "
-      + "00100000 01101100 01101111 "
-      + "01101110 01100101 01101100 01111001";
 
     do
     {
@@ -58,7 +40,7 @@ public class BinaryConversionTrainer
       if(Character.toUpperCase(sample) == 'Y')
       {
 
-        System.out.printf("%nOkay, we'll work on an easy sample.  Would you like to start with a value already in binary?");
+        System.out.printf("%nOkay, we'll work on a sample problem.  Would you like to start with a value already in binary?");
         binaryChoice = input.nextLine().charAt(0);
 
         //yes, binary to decimal/ASCII
@@ -84,11 +66,11 @@ public class BinaryConversionTrainer
 
           System.out.printf("%nAlright, here we go.%nEach of the following sets of 8 bits represents a character in the ASCII character set.%nConvert each byte to its decimal equivalent,%nthen use those numbers from 0 to 255 "
                               + "to find the corresponding ASCII character.");
-          System.out.printf("%nHere's your first challenge: %s%nPlease enter your answer here:", helloWorldBinary);
+          //System.out.printf("%nHere's your first challenge: %s%nPlease enter your answer here:", helloWorldBinary);
 
           answer = input.nextLine();
 
-          decimalResult = binaryToDecimal(helloWorldBinary);
+          //decimalResult = binaryToDecimal(helloWorldBinary);
 
           System.out.print(decimalResult);
 
@@ -133,44 +115,5 @@ public class BinaryConversionTrainer
 
   }//end main()
 
-
-  public static String binaryToDecimal(String s)
-  {
-    //arraylist to handle any number of characters.
-
-    int length = s.length();
-    String result = "";
-
-    /*
-     * Why ArrayList?  We can't know how long the randomly-generated binary strings will be.
-     * ArrayList provides scalability
-     */
-
-    ArrayList <String> substrings = new ArrayList <>();
-    ArrayList <String> decimals = new ArrayList <>();
-
-      for(int placeHolder = 0; placeHolder < length; placeHolder+=8)
-      {
-        int index = 0;
-        substrings.add(index, s.substring(placeHolder, placeHolder+8));
-
-
-        index++;
-
-      }
-
-    for (String substring : substrings)
-    {
-
-      result += Integer.parseInt(substring, 2) + ".";
-
-    }
-
-
-    //Debug statement for this method: System.out.println(substrings);
-
-    return result;
-
-  }
 
 }//end application class BinaryConversionTrainer
