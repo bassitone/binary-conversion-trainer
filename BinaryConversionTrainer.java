@@ -11,6 +11,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 import java.util.ArrayList;
 
+import static javax.swing.JOptionPane.showConfirmDialog;
+
 public class BinaryConversionTrainer
 {
 
@@ -53,7 +55,7 @@ public class BinaryConversionTrainer
                 {
 
                     //prompt user to get an ASCII conversion table
-                    hasAscii(hasAscii);
+                    //hasAscii(hasAscii);
                     //end Ascii check
 
                     System.out.printf("%nAlright, here we go.%nEach of the following sets of 8 bits" +
@@ -66,6 +68,10 @@ public class BinaryConversionTrainer
                     {
 
                         activeExercise = aConverter.getBinaryExercise(sampleCounter);
+
+
+
+
 
                         System.out.printf("%nHere's your challenge: %s%nPlease enter your answer here:",
                                 activeExercise);
@@ -158,7 +164,9 @@ public class BinaryConversionTrainer
     {
         while(hasAscii !=0)
         {
-            hasAscii = JOptionPane.showConfirmDialog(null, "Alright, you will need an ASCII table for this.\nGo ahead and Google one, I can wait.\nPlease let me know when you are ready");
+            hasAscii = showConfirmDialog(null, "Alright, you will need an ASCII table for this.\nGo ahead and Google one, I can wait.\nPlease let me know when you are ready");
+
+
 
             //System.out.printf("%nDEBUG: n = %d%n", hasAscii);
 

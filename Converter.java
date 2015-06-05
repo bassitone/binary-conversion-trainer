@@ -1,6 +1,7 @@
 import javax.script.ScriptEngine;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -29,24 +30,42 @@ public class Converter {
 
     //instance variables
     private Random ipAddressGenerator = new Random();
-    private int firstOctet = 0;
-    private int secondOctet = 0;
-    private int thirdOctet = 0;
-    private int fourthOctet = 0;
+    private int firstOctet;
+    private int secondOctet;
+    private int thirdOctet;
+    private int fourthOctet;
+    private String text;
 
 
-    public Converter() {
+    public Converter()
+    {
         //default constructor, may do ~things~ with it
 
     }
 
-    public Converter(int placeHolder) {
+    //four args constructor.  Use me for IP addressing
+    public Converter(int first, int second, int third, int fourth)
+    {
+        /*
+        setFirstOctet(first);
+        setSecondOctet(second);
+        setThirdOctet(third);
+        setFourthOctet(fourth);
+        */
+    }
 
+    //Input english text or a binary string to translate, then call me.
+    public Converter(String text)
+    {
+      /*
+        setText(text);
+      */
     }
 
 
     //binary to decimal
-    public String convertToDecimal(String s) {
+    public String convertToDecimal(String s)
+    {
         //arraylist to handle any number of characters.
 
         int length = s.length();
@@ -60,14 +79,19 @@ public class Converter {
         ArrayList<String> substrings = new ArrayList<>();
         ArrayList<String> decimals = new ArrayList<>();
 
+        /* System.out.printf("Debug: str = %s", s); */
+
         for (int placeHolder = 0; placeHolder < length; placeHolder += 8) {
             int index = 0;
+            /* System.out.printf("Debug: substrings = %s", substrings); */
             substrings.add(index, s.substring(placeHolder, placeHolder + 8));
 
 
             index++;
 
         }
+
+        Collections.reverse(substrings);
 
         for (String substring : substrings)
         {
@@ -81,7 +105,7 @@ public class Converter {
 
         return result;
 
-    }
+    }//end convertToDecimal(String): String
 
     /*
         takes the result from convertToDecimal and turns them into their character values.
@@ -116,10 +140,10 @@ public class Converter {
 
         charValues = new ArrayList<>(charString.size());
 
-        for (int val = 0; val < charString.size(); val++)
+        for (String aCharString : charString)
         {
             //change the strings in charString to integers
-            charValues.add(Integer.parseInt(charString.get(val)));
+            charValues.add(Integer.parseInt(aCharString));
         }
 
         //Debug: System.out.println("charValues: " + charValues + "\n size: " + charValues.size());
@@ -152,7 +176,7 @@ public class Converter {
 
         return englishResult;
 
-    }
+    }//end getEnglishTranslation(String): String
 
 
     public String getBinaryExercise(int sampleCount)
@@ -162,44 +186,55 @@ public class Converter {
         String example = "";
         switch (sampleCount) {
             case 0:
-                for(int loc = 0; loc < helloWorldBinary.length(); loc++)
+                for(int loc = 0; loc <= helloWorldBinary.length(); loc++)
                 {
                     if(loc % 8 == 0 && loc != 0)
                     {
                         substrings.add(helloWorldBinary.substring(begin, loc));
                         //substrings.add(" ");
-                        begin = loc + 1;
+                        begin = loc;
                     }
                 }
+
+                Collections.reverse(substrings);
+
                 example = substrings.toString();
                 break;
             case 1:
-                for(int loc = 0; loc < testBinaryOne.length(); loc++)
+                for(int loc = 0; loc <= testBinaryOne.length(); loc++)
                 {
                     if(loc % 8 == 0)
                     {
                         substrings.add(testBinaryOne.substring(begin, loc));
                         //substrings.add(" ");
-                        begin = loc + 1;
+                        begin = loc;
                     }
                 }
+
+                Collections.reverse(substrings);
+
                 example = substrings.toString();
                 break;
             case 2:
-                for(int loc = 0; loc < testBinaryTwo.length(); loc++)
+                for(int loc = 0; loc <= testBinaryTwo.length(); loc++)
                 {
                     if(loc % 8 == 0)
                     {
                         substrings.add(testBinaryTwo.substring(begin, loc));
                         //substrings.add(" ");
-                        begin = loc + 1;
+                        begin = loc;
                     }
                 }
+
+                Collections.reverse(substrings);
+
                 example = substrings.toString();
                 break;
         }
 
         return example;
 
-    }
+    }//end getBinaryExercise(int): String
+
+
 }
