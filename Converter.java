@@ -9,7 +9,8 @@ import java.util.Random;
  *
  * This class does the processing of binary or decimal inputs to their opposite
  */
-public class Converter {
+public class Converter
+{
     //sample problems
     private static final String helloWorldBinary = "01001000" + "01100101" + "01101100" + "01101100" +
             "01101111" + "00100000" + "01010111" + "01101111" + "01110010" + "01101100" + "01100100";
@@ -77,7 +78,6 @@ public class Converter {
      */
 
         ArrayList<String> substrings = new ArrayList<>();
-        ArrayList<String> decimals = new ArrayList<>();
 
         /* System.out.printf("Debug: str = %s", s); */
 
@@ -236,5 +236,45 @@ public class Converter {
 
     }//end getBinaryExercise(int): String
 
+    //Takes an input string of text and grabs each character's decimal value
+    public String getDecimalValues(String str)
+    {
+        int target = str.length();
+
+        int [] theNumbers = new int[target];
+
+        for(int i = 0; i < theNumbers.length; i++)
+        {
+            theNumbers[i] = str.charAt(i);
+        }
+
+        ArrayList<String> decimalsOut = new ArrayList<>();
+
+
+        for(int value : theNumbers)
+        {
+            decimalsOut.add(Integer.toString(value));
+        }
+
+        return decimalsOut.toString();
+
+    }//end getDecimalValues(String): String
+
+    public String getBinary(String numString)
+    {
+        ArrayList<Integer> staging = new ArrayList<>(numString.length());
+
+        String helper = numString.replaceAll("[,\\[\\] ]", "");
+
+        ArrayList<String> binary = new ArrayList<>(staging.size());
+
+        for(int iter = 0; iter < numString.length(); iter++)
+        {
+
+        }
+
+        return binary.toString(); //placeholder until next time
+
+    }
 
 }

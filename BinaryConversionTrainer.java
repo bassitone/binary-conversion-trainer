@@ -127,6 +127,9 @@ public class BinaryConversionTrainer
                 else //going TO binary from decimal/ASCII
                 {
 
+                    String debugOutput = aConverter.getDecimalValues("Hello World");
+                    System.out.println(debugOutput);
+
 
 
                 }//end else
