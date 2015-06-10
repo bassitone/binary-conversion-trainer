@@ -73,7 +73,8 @@ public class BinaryConversionTrainer
 
 
 
-                        System.out.printf("%nHere's your challenge: %s%nPlease enter your answer here:",
+                        System.out.printf("%nHere's your challenge: %s%nPlease enter the " +
+                                        "English translation here:",
                                 activeExercise);
 
                         String activeExerciseHelper = "";
@@ -84,6 +85,18 @@ public class BinaryConversionTrainer
                         }
 
                         answer = input.nextLine();
+
+                        boolean correct = aConverter.checkAnswer(answer, activeExerciseHelper);
+
+                        if(correct)
+                        {
+                            System.out.printf("%nGood job!  %s is correct.%n", answer);
+                        }
+
+                        else
+                        {
+                            System.out.printf("%nSorry, %s is incorrect.  Please try again.", answer);
+                        }
 
                         decimalResult = aConverter.convertToDecimal(activeExerciseHelper);
 
@@ -129,6 +142,8 @@ public class BinaryConversionTrainer
 
                     String debugOutput = aConverter.getDecimalValues("Hello World");
                     System.out.println(debugOutput);
+
+                    System.out.print(aConverter.getBinary(debugOutput));
 
 
 

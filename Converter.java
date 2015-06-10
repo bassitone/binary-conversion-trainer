@@ -30,12 +30,12 @@ public class Converter
             + "01101110" + "01100101" + "01101100" + "01111001";
 
     //instance variables
-    private Random ipAddressGenerator = new Random();
-    private int firstOctet;
-    private int secondOctet;
-    private int thirdOctet;
-    private int fourthOctet;
+
     private String text;
+    private String binaryString;
+    private boolean isBinary = false;
+    private int decimalToConvert;
+
 
 
     public Converter()
@@ -45,23 +45,29 @@ public class Converter
     }
 
     //four args constructor.  Use me for IP addressing
-    public Converter(int first, int second, int third, int fourth)
-    {
-        /*
-        setFirstOctet(first);
-        setSecondOctet(second);
-        setThirdOctet(third);
-        setFourthOctet(fourth);
-        */
-    }
+
 
     //Input english text or a binary string to translate, then call me.
-    public Converter(String text)
+    public Converter(String englishString)
     {
       /*
-        setText(text);
+        setText(englishString);
       */
     }
+
+    public Converter(int decimal)
+    {
+        //setDecimal(decimal);
+    }
+
+    public Converter(String binaryString, boolean binary)
+    {
+        //setBinary(binary);
+    }
+
+
+
+
 
 
     //binary to decimal
@@ -191,7 +197,6 @@ public class Converter
                     if(loc % 8 == 0 && loc != 0)
                     {
                         substrings.add(helloWorldBinary.substring(begin, loc));
-                        //substrings.add(" ");
                         begin = loc;
                     }
                 }
@@ -206,7 +211,6 @@ public class Converter
                     if(loc % 8 == 0)
                     {
                         substrings.add(testBinaryOne.substring(begin, loc));
-                        //substrings.add(" ");
                         begin = loc;
                     }
                 }
@@ -260,20 +264,75 @@ public class Converter
 
     }//end getDecimalValues(String): String
 
+    /*
+    takes in a String of decimal values that correspond to the English characters in an ASCII table
+    This method only needs to convert from that decimal to its binary form
+    end result is akin to the static field helloWorldBinary
+    */
     public String getBinary(String numString)
     {
+        //holds the decimal values we send the method, encoded as primitive ints
         ArrayList<Integer> staging = new ArrayList<>(numString.length());
 
-        String helper = numString.replaceAll("[,\\[\\] ]", "");
+        //Takes the string we sent the method and removes all the formatting bullshit
+        String helper = numString.replaceAll("[\\[\\] ]", "");
 
-        ArrayList<String> binary = new ArrayList<>(staging.size());
+        int beginFlag = 0;
+        int endFlag = 0;
 
-        for(int iter = 0; iter < numString.length(); iter++)
+        for(int aChar = 0; aChar < helper.length(); aChar++)
         {
+            if(helper.charAt(aChar) == ',')
+            {
+                endFlag = aChar;
+                staging.add(Integer.parseInt(helper.substring(beginFlag, endFlag)));
+                beginFlag = aChar + 1;
+            }
+
+            else if(aChar == helper.length()-1)
+            {
+                staging.add(Integer.parseInt(helper.substring(beginFlag, aChar + 1)));
+            }
+
+            //Example from StackOverflow: String.format("%8s", Integer.toBinaryString(1)).replace(' ', '0')
 
         }
 
-        return binary.toString(); //placeholder until next time
+        System.out.println("Debug: staging = " + staging);
+
+        ArrayList <String> bin = new ArrayList<>(staging.size());
+
+        for(int index = 0; index < staging.size(); index++)
+        {
+            int extract = staging.get(index);
+            String temp = Integer.toBinaryString(extract);
+            if(temp.length() < 8)
+            {
+                for(int zerosToAdd = 0; zerosToAdd < 8 - temp.length(); zerosToAdd++)
+                {
+                    temp = 0 + temp;
+                }
+            }
+
+            bin.add(temp);
+        }
+
+
+        return bin.toString(); //placeholder until next time
+
+    }
+
+    public boolean checkAnswer(String answer, String exercise)
+    {
+        boolean correct = false;
+
+        System.out.println("Debug: check answer = " + exercise.compareTo(answer));
+        if(exercise.compareTo(answer) == 0)
+        {
+            correct = true;
+        }
+
+        return correct;
 
     }
 
